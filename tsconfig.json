@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es6",                               
+    "module": "esnext",                             
+    "baseUrl": "./src",
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "strictPropertyInitialization": false,
+    "resolveJsonModule": true,
+  },
+}
