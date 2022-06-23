@@ -1,4 +1,4 @@
-import { mockSiteTrials } from "mockData/siteTrials";
+import { mockSiteTrials } from "mockData/siteTrial";
 import { rest } from "msw";
 import { generateSiteTrialsTransit } from "transit/sitesTrials";
 import { ApiMockOverrideType } from "types/MockApiTypes";
