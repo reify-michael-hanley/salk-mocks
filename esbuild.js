@@ -13,7 +13,7 @@ esbuild
     target: ["esnext"],
     treeShaking: true,
     sourcesContent: false,
-    plugins: [dtsPlugin()]
+    plugins: [dtsPlugin()],
   })
   // eslint-disable-next-line no-undef
   .catch(() => process.exit(1));

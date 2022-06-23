@@ -17,7 +17,8 @@
   },
   "scripts": {
     "prepare": "npm run build",
-    "build": "rimraf dist && node ./esbuild.js"
+    "build": "rimraf dist && node ./esbuild.js",
+    "prettier": "prettier --write \"./**/*.{ts,json}\""
   },
   "devDependencies": {
     "@faker-js/faker": "^7.3.0",

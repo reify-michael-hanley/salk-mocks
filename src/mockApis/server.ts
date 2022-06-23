@@ -8,10 +8,10 @@ import {
 // import fallbackHandlers from "./handlers/fallback";
 
 const handlers = [
-  ...Object.values(SiteHandlers),
-  ...Object.values(SiteTrialHandlers),
-  ...Object.values(SiteTrialPatientHandlers),
-  ...Object.values(TaskHandlers),
+  ...Object.values(SiteHandlers).map((handler) => handler()),
+  ...Object.values(SiteTrialHandlers).map((handler) => handler()),
+  ...Object.values(SiteTrialPatientHandlers).map((handler) => handler()),
+  ...Object.values(TaskHandlers).map((handler) => handler()),
   // ...Object.values(fallbackHandlers),
 ];
 
