@@ -1,4 +1,4 @@
-import mockSiteData from "mockData/site";
+import {mockSite} from "mockData/mockSite";
 import { rest } from "msw";
 import * as transit from "transit-js";
 import { Site } from "types/site";
@@ -63,8 +63,8 @@ const siteHandlers = {
     return res(ctx.json([]));
   }),
   site: rest.get(`/api/salk/sites`, (_req, res, ctx) => {
-    const mockSiteTransit = siteTransitMap(mockSiteData);
-    const transitJson = transitWriter.write([mockSiteTransit]);
+    const transitSite = siteTransitMap(mockSite);
+    const transitJson = transitWriter.write([transitSite]);
     return res(
       ctx.set("Content-Type", "application/transit+json;charset=UTF-8"),
       ctx.body(transitJson)

@@ -8,12 +8,11 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "allowJs": true,
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "declaration": true,
     "allowSyntheticDefaultImports": true,
-    "isolatedModules": true,
     "strictPropertyInitialization": false,
     "resolveJsonModule": true,
+    "sourceMap": true
   },
 }

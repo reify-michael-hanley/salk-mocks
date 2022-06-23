@@ -5,7 +5,7 @@ export type Site = {
   "trial-creation-disabled": boolean;
   "site-trials": {
     name: string;
-    "site-number": number;
+    "site-number": number | null;
     investigator: null | string;
   };
   "postal-code": null | string;
