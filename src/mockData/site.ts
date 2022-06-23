@@ -1,5 +1,6 @@
-import { Site } from "types/site";
 import { faker } from "@faker-js/faker";
+import { Site } from "types/Site";
+import { principleId } from "utils/matchingDataUtils";
 
 const generateSiteTrials = () => {
   const siteTrials = Array.from(
@@ -28,7 +29,7 @@ export const mockSite = (): Site => ({
   "is-pseudo": false,
   "created-at": faker.date.past().toDateString(),
   "time-zone": faker.address.timeZone(),
-  "principal-id": `test|${faker.random.numeric(24)}`,
+  "principal-id": principleId,
   country: "US",
   id: faker.datatype.uuid(),
 });

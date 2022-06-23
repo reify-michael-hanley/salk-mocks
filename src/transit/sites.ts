@@ -1,7 +1,7 @@
 import * as transit from "transit-js";
-import { Site } from "types/site";
+import { Site } from "types/Site";
 
-export const siteTransitMap = (siteData: Site) => {
+const siteTransitMap = (siteData: Site) => {
   const transitSiteTrials = siteData["site-trials"].map((siteTrial) => {
     return transit.map([
       transit.keyword("name"),

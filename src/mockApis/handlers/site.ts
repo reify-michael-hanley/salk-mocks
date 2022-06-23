@@ -1,12 +1,8 @@
 import { mockSites } from "mockData/site";
 import { rest } from "msw";
 import { generateSitesTransit } from "transit/sites";
-import { Site } from "types/site";
-
-type ApiMockOverrideType<T> = {
-  respone?: T;
-  status?: number;
-};
+import { ApiMockOverrideType } from "types/MockApiTypes";
+import { Site } from "types/Site";
 
 const siteHandlers = {
   siteVisitsOverview: () =>
