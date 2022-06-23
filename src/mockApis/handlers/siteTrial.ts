@@ -8,7 +8,7 @@ const siteTrialHandlers = {
   siteTrialsWithMatches: (overrides?: ApiMockOverrideType<SiteTrial[]>) => {
     const status = overrides?.status ?? 200;
 
-    const siteTrials = overrides?.respone ?? mockSiteTrials(10);
+    const siteTrials = overrides?.response ?? mockSiteTrials(10);
     const transitSiteTrials = generateSiteTrialsTransit(siteTrials);
 
     return rest.get(

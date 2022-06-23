@@ -1,4 +1,4 @@
 export type ApiMockOverrideType<T> = {
-  respone?: T;
+  response?: T;
   status?: number;
 };

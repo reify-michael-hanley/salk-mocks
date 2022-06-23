@@ -19,7 +19,7 @@ const siteHandlers = {
   potentialTrials: (overrides?: ApiMockOverrideType<PotentialTrial[]>) => {
     const status = overrides?.status ?? 200;
 
-    const potentialTrials = overrides?.respone ?? mockPotentialTrials(1);
+    const potentialTrials = overrides?.response ?? mockPotentialTrials(1);
     const transitPotentialTrials =
       generatePotentialTrialsTransit(potentialTrials);
 
@@ -37,7 +37,7 @@ const siteHandlers = {
   site: (overrides?: ApiMockOverrideType<Site[]>) => {
     const status = overrides?.status ?? 200;
 
-    const sites = overrides?.respone ?? mockSites(1);
+    const sites = overrides?.response ?? mockSites(1);
     const transitSites = generateSitesTransit(sites);
 
     return rest.get(`/api/salk/sites`, (_req, res, ctx) => {
