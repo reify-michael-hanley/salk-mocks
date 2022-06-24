@@ -21,6 +21,18 @@ const salkHandlers = {
       );
     });
   },
+  siteNetworks: (overrides?: ApiMockOverrideType<[]>) => {
+    const status = overrides?.status ?? 200;
+    const response = JSON.stringify([]);
+
+    return rest.get(`/api/salk/site-networks`, (_req, res, ctx) => {
+      return res(
+        ctx.status(status),
+        ctx.set("Content-Type", "application/transit+json"),
+        ctx.body(response)
+      );
+    });
+  },
 };
 
 export default salkHandlers;
