@@ -1,5 +1,6 @@
-import { TherapeuticArea } from "types/TherapeuticAreas";
 import * as transit from "transit-js";
+import { TherapeuticArea } from "types/TherapeuticAreas";
+import { transitWriter } from "utils/transitUtils";
 
 const therapeuticAreaMap = (therapeuticArea: TherapeuticArea) => {
   const therapeuticAreaTransit = transit.map([
@@ -15,7 +16,6 @@ const therapeuticAreaMap = (therapeuticArea: TherapeuticArea) => {
 export const generateTherapeuticAreaTransit = (
   therapeuticAreas: TherapeuticArea[]
 ): string => {
-  const transitWriter = transit.writer("json");
   const transitTherapeuticAreas = therapeuticAreas.map(therapeuticAreaMap);
   const transitJson = transitWriter.write(transitTherapeuticAreas);
 

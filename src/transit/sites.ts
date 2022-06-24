@@ -1,5 +1,6 @@
 import * as transit from "transit-js";
 import { Site } from "types/Site";
+import { transitWriter } from "utils/transitUtils";
 
 const siteTransitMap = (siteData: Site) => {
   const transitSiteTrials = siteData["site-trials"].map((siteTrial) => {
@@ -54,7 +55,6 @@ const siteTransitMap = (siteData: Site) => {
 };
 
 export const generateSitesTransit = (sites: Site[]): string => {
-  const transitWriter = transit.writer("json");
   const transitSite = sites.map(siteTransitMap);
   const transitJson = transitWriter.write(transitSite);
 

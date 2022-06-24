@@ -1,5 +1,6 @@
 import * as transit from "transit-js";
 import { PotentialTrial } from "types/PotentialTrial";
+import { transitWriter } from "utils/transitUtils";
 
 const potentialTrialTransitMap = (potentialTrial: PotentialTrial) => {
   const potentialTrialTransit = transit.map([
@@ -16,7 +17,7 @@ const potentialTrialTransitMap = (potentialTrial: PotentialTrial) => {
     transit.keyword("sponsor"),
     potentialTrial.sponsor,
     transit.keyword("status"),
-    potentialTrial.status,
+    transit.keyword(potentialTrial.status),
   ]);
 
   return potentialTrialTransit;
@@ -25,7 +26,6 @@ const potentialTrialTransitMap = (potentialTrial: PotentialTrial) => {
 export const generatePotentialTrialsTransit = (
   potentialTrials: PotentialTrial[]
 ): string => {
-  const transitWriter = transit.writer("json");
   const transitSite = potentialTrials.map(potentialTrialTransitMap);
   const transitJson = transitWriter.write(transitSite);
 

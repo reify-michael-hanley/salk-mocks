@@ -15,7 +15,7 @@ export const mockSiteTrial = (): SiteTrial => ({
   "sponsor-trial-id": faker.datatype.uuid(),
   "site-log-indicated-at": faker.datatype.datetime(),
   "enrollment-goal": faker.datatype.number({ min: 30, max: 999 }),
-  "site-status": SiteStatus.Selected,
+  "site-status": faker.helpers.objectValue(SiteStatus),
   "row-id": faker.datatype.number({ min: 100, max: 999 }),
   "referral-enabled": faker.datatype.boolean(),
   "updated-by": faker.datatype.uuid(),

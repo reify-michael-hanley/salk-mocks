@@ -1,5 +1,6 @@
 import * as transit from "transit-js";
 import { SiteTrial } from "types/SiteTrial";
+import { transitWriter } from "utils/transitUtils";
 
 const siteTrialTransitMap = (siteTrialData: SiteTrial) => {
   const siteTrialTransit = transit.map([
@@ -22,7 +23,7 @@ const siteTrialTransitMap = (siteTrialData: SiteTrial) => {
     transit.keyword("enrollment-goal"),
     siteTrialData["enrollment-goal"],
     transit.keyword("site-status"),
-    siteTrialData["site-status"],
+    transit.keyword(siteTrialData["site-status"]),
     transit.keyword("row-id"),
     siteTrialData["row-id"],
     transit.keyword("referral-enabled"),
@@ -104,7 +105,6 @@ const siteTrialTransitMap = (siteTrialData: SiteTrial) => {
 };
 
 export const generateSiteTrialsTransit = (siteTrials: SiteTrial[]): string => {
-  const transitWriter = transit.writer("json");
   const transitSite = siteTrials.map(siteTrialTransitMap);
   const transitJson = transitWriter.write(transitSite);
 

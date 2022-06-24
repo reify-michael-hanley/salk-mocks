@@ -11,7 +11,7 @@ export const mockPotentialTrial = (): PotentialTrial => ({
   "date-added": faker.datatype.datetime(),
   deadline: faker.datatype.datetime(),
   sponsor: faker.lorem.word(),
-  status: PotentialTrialStatus.PotentialApproved,
+  status: faker.helpers.objectValue(PotentialTrialStatus),
 });
 
 export const mockPotentialTrials = (numberOfSites = 10) => {
