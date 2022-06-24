@@ -34,7 +34,7 @@ const salkHandlers = {
     const transitConceptResearchIndications =
       generateConceptResearchIndicationTransit(response);
 
-    return rest.get(`/api/salk/site-networks`, (_req, res, ctx) => {
+    return rest.get(`/api/salk/research-indications`, (_req, res, ctx) => {
       return res(
         ctx.status(status),
         ctx.set("Content-Type", "application/transit+json"),
