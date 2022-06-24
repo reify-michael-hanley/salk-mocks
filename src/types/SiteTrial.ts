@@ -1,7 +1,8 @@
 export enum SiteStatus {
-  Closed = "closed",
-  Planned = "planned",
-  Selected = "selected",
+  NONE = "None",
+  CLOSED = "closed",
+  PLANNED = "planned",
+  SELECTED = "selected",
 }
 
 export type SiteTrial = {

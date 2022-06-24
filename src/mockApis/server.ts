@@ -5,6 +5,7 @@ import {
   SiteTrialPatientHandlers,
   TaskHandlers,
   salkHandlers,
+  userHandlers,
 } from "./handlers";
 // import fallbackHandlers from "./handlers/fallback";
 
@@ -14,6 +15,7 @@ const handlers = [
   ...Object.values(SiteTrialPatientHandlers).map((handler) => handler()),
   ...Object.values(TaskHandlers).map((handler) => handler()),
   ...Object.values(salkHandlers).map((handler) => handler()),
+  ...Object.values(userHandlers).map((handler) => handler()),
   // ...Object.values(fallbackHandlers),
 ];
 

@@ -3,6 +3,7 @@ import SiteTrialHandlers from "./siteTrial";
 import SiteTrialPatientHandlers from "./siteTrialPatient";
 import TaskHandlers from "./task";
 import salkHandlers from "./salk";
+import userHandlers from "./user";
 
 export {
   SiteHandlers,
@@ -10,4 +11,5 @@ export {
   SiteTrialPatientHandlers,
   TaskHandlers,
   salkHandlers,
+  userHandlers,
 };

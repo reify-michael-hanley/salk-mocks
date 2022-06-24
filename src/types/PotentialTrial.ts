@@ -1,7 +1,8 @@
 export enum PotentialTrialStatus {
-  PotentialApproved = "potential-approved",
-  OnHold = "on-hold",
-  PotentialInterested = "potential-interested",
+  NONE = "none",
+  POTENTIAL_APPROVED = "potential-approved",
+  ON_HOLD = "on-hold",
+  POTENTIAL_INTERESTED = "potential-interested",
 }
 
 export type PotentialTrial = {
