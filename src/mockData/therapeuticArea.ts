@@ -1,6 +1,6 @@
 import { TherapeuticArea } from "types/TherapeuticAreas";
 
-export const therapeuticAreas: TherapeuticArea[] = [
+export const mockTherapeuticAreas: TherapeuticArea[] = [
   { label: "Ophthalmology", id: "c75b4ab0-75d7-5696-a1db-c0c947f1f776" },
   { label: "Endocrinology", id: "9b128deb-9bf4-4724-b888-ec30d5d74c06" },
   { label: "Rare Diseases", id: "650c2bed-e52e-4373-91ed-a87096f97094" },

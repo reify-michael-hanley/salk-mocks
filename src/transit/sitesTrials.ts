@@ -105,8 +105,8 @@ const siteTrialTransitMap = (siteTrialData: SiteTrial) => {
 };
 
 export const generateSiteTrialsTransit = (siteTrials: SiteTrial[]): string => {
-  const transitSite = siteTrials.map(siteTrialTransitMap);
-  const transitJson = transitWriter.write(transitSite);
+  const transitSiteTrials = siteTrials.map(siteTrialTransitMap);
+  const transitJson = transitWriter.write(transitSiteTrials);
 
   return transitJson;
 };

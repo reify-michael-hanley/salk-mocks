@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { AnalyticProfile, CurrentUser } from "types/CurrentUser";
 import { principleId } from "utils/matchingDataUtils";
 
-export const currentUser: CurrentUser = {
+export const mockCurrentUser: CurrentUser = {
   id: faker.datatype.uuid(),
   email: faker.internet.email(),
   inactive: false,

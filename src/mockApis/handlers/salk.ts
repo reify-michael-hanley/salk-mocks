@@ -1,5 +1,5 @@
-import { conceptResearchIndication } from "mockData/conceptResearchIndications";
-import { therapeuticAreas } from "mockData/therapeuticArea";
+import { mockConceptResearchIndication } from "mockData/conceptResearchIndications";
+import { mockTherapeuticAreas } from "mockData/therapeuticArea";
 import { rest } from "msw";
 import { generateConceptResearchIndicationTransit } from "transit/conceptResearchIndications";
 import { generateTherapeuticAreaTransit } from "transit/therapeuticArea";
@@ -11,7 +11,8 @@ const salkHandlers = {
   getTherapeuticAreas: (overrides?: ApiMockOverrideType<TherapeuticArea[]>) => {
     const status = overrides?.status ?? 200;
 
-    const therapeuticAreasResponse = overrides?.response ?? therapeuticAreas;
+    const therapeuticAreasResponse =
+      overrides?.response ?? mockTherapeuticAreas;
     const transitTherapeuticAreas = generateTherapeuticAreaTransit(
       therapeuticAreasResponse
     );
@@ -28,7 +29,7 @@ const salkHandlers = {
     overrides?: ApiMockOverrideType<ConceptResearchIndication[]>
   ) => {
     const status = overrides?.status ?? 200;
-    const response = overrides?.response ?? conceptResearchIndication;
+    const response = overrides?.response ?? mockConceptResearchIndication;
 
     const transitConceptResearchIndications =
       generateConceptResearchIndicationTransit(response);

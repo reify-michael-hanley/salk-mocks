@@ -1,4 +1,4 @@
-import { currentUser } from "mockData/currentUser";
+import { mockCurrentUser } from "mockData/currentUser";
 import { rest } from "msw";
 import { generateCurrentUserTransit } from "transit/currentUser";
 import { CurrentUser } from "types/CurrentUser";
@@ -8,7 +8,7 @@ const userHandlers = {
   getCurrentUser: (overrides?: ApiMockOverrideType<CurrentUser>) => {
     const status = overrides?.status ?? 200;
 
-    const currentUserResponse = overrides?.response ?? currentUser;
+    const currentUserResponse = overrides?.response ?? mockCurrentUser;
 
     return rest.get(`/api/salk/user/:userId`, (req, res, ctx) => {
       const userId = req.params.userId as string;

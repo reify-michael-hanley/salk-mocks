@@ -1,8 +1,11 @@
+import { mockFusebox } from "mockData/fusbox";
 import { mockPotentialTrials } from "mockData/potentialTrial";
 import { mockSites } from "mockData/site";
 import { rest } from "msw";
+import { generateFuseboxTransit } from "transit/fusebox";
 import { generatePotentialTrialsTransit } from "transit/potentialTrials";
 import { generateSitesTransit } from "transit/sites";
+import { Fusebox } from "types/Fusebox";
 import { ApiMockOverrideType } from "types/MockApiTypes";
 import { PotentialTrial } from "types/PotentialTrial";
 import { Site } from "types/Site";
@@ -33,6 +36,20 @@ const siteHandlers = {
         );
       }
     );
+  },
+  getFuseBox: (overrides?: ApiMockOverrideType<Fusebox>) => {
+    const status = overrides?.status ?? 200;
+
+    const fuseboxResponse = overrides?.response ?? mockFusebox;
+    const transitSites = generateFuseboxTransit(fuseboxResponse);
+
+    return rest.get(`/api/salk/site/:siteId/fusebox`, (_req, res, ctx) => {
+      return res(
+        ctx.status(status),
+        ctx.set("Content-Type", "application/transit+json;charset=UTF-8"),
+        ctx.body(transitSites)
+      );
+    });
   },
   getSite: (overrides?: ApiMockOverrideType<Site[]>) => {
     const status = overrides?.status ?? 200;

@@ -46,8 +46,8 @@ const currentUserTransitMap = (currentUser: CurrentUser) => {
 export const generateCurrentUserTransit = (
   currentUser: CurrentUser
 ): string => {
-  const transitSite = currentUserTransitMap(currentUser);
-  const transitJson = transitWriter.write(transitSite);
+  const transitCurrentUser = currentUserTransitMap(currentUser);
+  const transitJson = transitWriter.write(transitCurrentUser);
 
   return transitJson;
 };

@@ -1,6 +1,6 @@
 import { ConceptResearchIndication } from "types/ConceptResearchIndication";
 
-export const conceptResearchIndication: ConceptResearchIndication[] = [
+export const mockConceptResearchIndication: ConceptResearchIndication[] = [
   {
     label: "Indication 1",
     id: "3d98b94e-0e2f-4431-84aa-66e75d32a333",

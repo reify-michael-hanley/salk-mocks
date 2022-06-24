@@ -26,8 +26,8 @@ const potentialTrialTransitMap = (potentialTrial: PotentialTrial) => {
 export const generatePotentialTrialsTransit = (
   potentialTrials: PotentialTrial[]
 ): string => {
-  const transitSite = potentialTrials.map(potentialTrialTransitMap);
-  const transitJson = transitWriter.write(transitSite);
+  const transitPotentialTrial = potentialTrials.map(potentialTrialTransitMap);
+  const transitJson = transitWriter.write(transitPotentialTrial);
 
   return transitJson;
 };
