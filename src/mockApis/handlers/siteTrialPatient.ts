@@ -1,7 +1,7 @@
 import { rest } from "msw";
 
 const SiteTrialPatientHandlers = {
-  editSubjectId: () =>
+  putSubjectId: () =>
     rest.put<{ "subject-id": string }>(
       `/api/salk/site-trial-patient/:siteTrialPatientId/subject-id`,
       (req, res, ctx) => {

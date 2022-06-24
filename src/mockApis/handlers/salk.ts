@@ -8,7 +8,7 @@ import { ApiMockOverrideType } from "types/MockApiTypes";
 import { TherapeuticArea } from "types/TherapeuticAreas";
 
 const salkHandlers = {
-  therapeuticAreas: (overrides?: ApiMockOverrideType<TherapeuticArea[]>) => {
+  getTherapeuticAreas: (overrides?: ApiMockOverrideType<TherapeuticArea[]>) => {
     const status = overrides?.status ?? 200;
 
     const therapeuticAreasResponse = overrides?.response ?? therapeuticAreas;
@@ -24,7 +24,7 @@ const salkHandlers = {
       );
     });
   },
-  conceptResearchIndications: (
+  getConceptResearchIndications: (
     overrides?: ApiMockOverrideType<ConceptResearchIndication[]>
   ) => {
     const status = overrides?.status ?? 200;
@@ -41,7 +41,7 @@ const salkHandlers = {
       );
     });
   },
-  siteNetworks: (overrides?: ApiMockOverrideType<[]>) => {
+  getSiteNetworks: (overrides?: ApiMockOverrideType<[]>) => {
     const status = overrides?.status ?? 200;
     const response = JSON.stringify([]);
 

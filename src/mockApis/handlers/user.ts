@@ -5,7 +5,7 @@ import { CurrentUser } from "types/CurrentUser";
 import { ApiMockOverrideType } from "types/MockApiTypes";
 
 const userHandlers = {
-  currentUser: (overrides?: ApiMockOverrideType<CurrentUser>) => {
+  getCurrentUser: (overrides?: ApiMockOverrideType<CurrentUser>) => {
     const status = overrides?.status ?? 200;
 
     const currentUserResponse = overrides?.response ?? currentUser;

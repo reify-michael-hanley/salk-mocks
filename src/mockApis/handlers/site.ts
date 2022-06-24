@@ -8,15 +8,15 @@ import { PotentialTrial } from "types/PotentialTrial";
 import { Site } from "types/Site";
 
 const siteHandlers = {
-  siteVisitsOverview: () =>
+  getSiteVisitsOverview: () =>
     rest.get(`/api/salk/site/:siteId/visit/overview`, (_req, res, ctx) => {
       return res(ctx.json({ visitCount: 0 }));
     }),
-  siteUser: () =>
+  getSiteUser: () =>
     rest.get(`/api/salk/site/:siteId/user`, (_req, res, ctx) => {
       return res(ctx.json([]));
     }),
-  potentialTrials: (overrides?: ApiMockOverrideType<PotentialTrial[]>) => {
+  getPotentialTrials: (overrides?: ApiMockOverrideType<PotentialTrial[]>) => {
     const status = overrides?.status ?? 200;
 
     const potentialTrials = overrides?.response ?? mockPotentialTrials(1);
@@ -34,7 +34,7 @@ const siteHandlers = {
       }
     );
   },
-  site: (overrides?: ApiMockOverrideType<Site[]>) => {
+  getSite: (overrides?: ApiMockOverrideType<Site[]>) => {
     const status = overrides?.status ?? 200;
 
     const sites = overrides?.response ?? mockSites(1);

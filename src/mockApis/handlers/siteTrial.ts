@@ -5,7 +5,7 @@ import { ApiMockOverrideType } from "types/MockApiTypes";
 import { SiteTrial } from "types/SiteTrial";
 
 const siteTrialHandlers = {
-  siteTrialsWithMatches: (overrides?: ApiMockOverrideType<SiteTrial[]>) => {
+  getSiteTrialsWithMatches: (overrides?: ApiMockOverrideType<SiteTrial[]>) => {
     const status = overrides?.status ?? 200;
 
     const siteTrials = overrides?.response ?? mockSiteTrials(10);
@@ -26,7 +26,7 @@ const siteTrialHandlers = {
       }
     );
   },
-  siteTrialStatus: () =>
+  getSiteTrialStatus: () =>
     rest.get(`/api/salk/site/:siteId/site-trials/status`, (_req, res, ctx) => {
       return res(ctx.json({ statuses: [] }));
     }),
