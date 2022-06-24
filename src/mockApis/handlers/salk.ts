@@ -1,6 +1,9 @@
+import { conceptResearchIndication } from "mockData/conceptResearchIndications";
 import { therapeuticAreas } from "mockData/therapeuticArea";
 import { rest } from "msw";
+import { generateConceptResearchIndicationTransit } from "transit/conceptResearchIndications";
 import { generateTherapeuticAreaTransit } from "transit/therapeuticArea";
+import { ConceptResearchIndication } from "types/ConceptResearchIndication";
 import { ApiMockOverrideType } from "types/MockApiTypes";
 import { TherapeuticArea } from "types/TherapeuticAreas";
 
@@ -18,6 +21,23 @@ const salkHandlers = {
         ctx.status(status),
         ctx.set("Content-Type", "application/transit+json;charset=UTF-8"),
         ctx.body(transitTherapeuticAreas)
+      );
+    });
+  },
+  conceptResearchIndications: (
+    overrides?: ApiMockOverrideType<ConceptResearchIndication[]>
+  ) => {
+    const status = overrides?.status ?? 200;
+    const response = overrides?.response ?? conceptResearchIndication;
+
+    const transitConceptResearchIndications =
+      generateConceptResearchIndicationTransit(response);
+
+    return rest.get(`/api/salk/site-networks`, (_req, res, ctx) => {
+      return res(
+        ctx.status(status),
+        ctx.set("Content-Type", "application/transit+json"),
+        ctx.body(transitConceptResearchIndications)
       );
     });
   },
