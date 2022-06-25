@@ -2,14 +2,14 @@ import SiteHandlers from "./site";
 import SiteTrialHandlers from "./siteTrial";
 import SiteTrialPatientHandlers from "./siteTrialPatient";
 import TaskHandlers from "./task";
-import salkHandlers from "./salk";
-import userHandlers from "./user";
+import SalkHandlers from "./salk";
+import UserHandlers from "./user";
 
 export {
   SiteHandlers,
   SiteTrialHandlers,
   SiteTrialPatientHandlers,
   TaskHandlers,
-  salkHandlers,
-  userHandlers,
+  SalkHandlers,
+  UserHandlers,
 };
