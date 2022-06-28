@@ -2,7 +2,7 @@ import { mockConceptResearchIndication } from "mockData/conceptResearchIndicatio
 import { mockTherapeuticAreas } from "mockData/therapeuticArea";
 import { rest } from "msw";
 import { generateConceptResearchIndicationTransit } from "transit/conceptResearchIndications";
-import { generateTherapeuticAreaTransit } from "transit/therapeuticArea";
+import { generateTherapeuticAreaTransit } from "transit/therapeuticAreas";
 import { ConceptResearchIndication } from "types/ConceptResearchIndication";
 import { ApiMockOverrideType } from "types/MockApiTypes";
 import { TherapeuticArea } from "types/TherapeuticAreas";

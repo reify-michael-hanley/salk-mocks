@@ -51,7 +51,7 @@ export type SiteTrial = {
   "new-referral-count": number;
   "protocol-id": null;
   "first-patient-visit": null;
-  "subject-id-prompt-stages": [];
+  "subject-id-prompt-stages": Array<string>;
   "enable-patient-matching": boolean;
   "investigator-id": null;
 };

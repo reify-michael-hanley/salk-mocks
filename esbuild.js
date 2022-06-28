@@ -1,4 +1,5 @@
 import { dtsPlugin } from "esbuild-plugin-d.ts";
+import { nodeExternalsPlugin } from "esbuild-node-externals";
 import esbuild from "esbuild";
 
 esbuild
@@ -13,7 +14,7 @@ esbuild
     target: ["esnext"],
     treeShaking: true,
     sourcesContent: false,
-    plugins: [dtsPlugin()],
+    plugins: [nodeExternalsPlugin(), dtsPlugin()],
   })
   // eslint-disable-next-line no-undef
   .catch(() => process.exit(1));

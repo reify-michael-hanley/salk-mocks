@@ -1,8 +1,11 @@
 import { faker } from "@faker-js/faker";
 import { SiteStatus, SiteTrial } from "types/SiteTrial";
 import { principleId } from "utils/matchingDataUtils";
+import { RecursivePartial } from "utils/typeUtils";
 
-export const mockSiteTrial = (): SiteTrial => ({
+export const mockSiteTrial = (
+  overrides?: RecursivePartial<SiteTrial>
+): SiteTrial => ({
   archived: faker.datatype.boolean(),
   "updated-at": faker.datatype.datetime(),
   "site-log-indication-enabled": faker.datatype.boolean(),
@@ -32,6 +35,17 @@ export const mockSiteTrial = (): SiteTrial => ({
   "created-at": faker.datatype.datetime(),
   "ie-criteria-checklist-enabled": faker.datatype.boolean(),
   sponsor: faker.lorem.word(),
+  "default-protocol-external-version-id": null,
+  "site-trial-latest-activity": null,
+  "last-patient-visit": null,
+  "new-transfer-count": faker.datatype.number({ min: 1, max: 100 }),
+  "new-referral-count": faker.datatype.number({ min: 1, max: 100 }),
+  "protocol-id": null,
+  "first-patient-visit": null,
+  "subject-id-prompt-stages": [],
+  "enable-patient-matching": faker.datatype.boolean(),
+  "investigator-id": null,
+  ...overrides,
   "patient-counts-by-stage": {
     "potential-candidate": faker.datatype.number({ min: 1, max: 100 }),
     completed: faker.datatype.number({ min: 1, max: 100 }),
@@ -43,24 +57,15 @@ export const mockSiteTrial = (): SiteTrial => ({
     "in-screening": faker.datatype.number({ min: 1, max: 100 }),
     discontinued: faker.datatype.number({ min: 1, max: 100 }),
     "pre-screening": faker.datatype.number({ min: 1, max: 100 }),
+    ...overrides?.["patient-counts-by-stage"],
   },
-  "default-protocol-external-version-id": null,
-  "site-trial-latest-activity": null,
-  "last-patient-visit": null,
-  "new-transfer-count": faker.datatype.number({ min: 1, max: 100 }),
-  "new-referral-count": faker.datatype.number({ min: 1, max: 100 }),
-  "protocol-id": null,
-  "first-patient-visit": null,
-  "subject-id-prompt-stages": [],
-  "enable-patient-matching": faker.datatype.boolean(),
-  "investigator-id": null,
 });
 
 export const mockSiteTrials = (numberOfSites = 10) => {
-  const mockSiteTrials = Array.from(
+  const mockSiteTrialsData = Array.from(
     { length: faker.datatype.number({ min: 1, max: numberOfSites }) },
     () => mockSiteTrial()
   );
 
-  return mockSiteTrials;
+  return mockSiteTrialsData;
 };
