@@ -2,11 +2,11 @@ import * as transit from "transit-js";
 import {
   FilteredSitePatient,
   FilteredSitePatientPageResponse,
-  filteredSiteTrialPatientLabel,
+  FilteredSiteTrialPatientLabel,
 } from "types/responseTypes/FilteredSitePatientPageResponse";
 import { transitWriter } from "utils/transitUtils";
 
-const labelsMap = (label: filteredSiteTrialPatientLabel) => {
+const labelsMap = (label: FilteredSiteTrialPatientLabel) => {
   return transit.map([
     ...(label.id ? [transit.keyword("id"), transit.uuid(label.id)] : []),
     ...(label.title

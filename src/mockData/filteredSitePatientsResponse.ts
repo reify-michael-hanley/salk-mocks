@@ -3,13 +3,13 @@ import { SiteTrialPatientStage } from "types/PatientAggregate";
 import {
   FilteredSitePatient,
   FilteredSitePatientPageResponse,
-  filteredSiteTrialPatient,
+  FilteredSiteTrialPatient,
 } from "types/responseTypes/FilteredSitePatientPageResponse";
 import { RecursivePartial } from "utils/typeUtils";
 
 const mockFilteredSiteTrialPatient = (
-  overrides?: RecursivePartial<filteredSiteTrialPatient>
-): filteredSiteTrialPatient => ({
+  overrides?: RecursivePartial<FilteredSiteTrialPatient>
+): FilteredSiteTrialPatient => ({
   id: faker.datatype.uuid(),
   labels: [],
   patientSource: null,
@@ -25,7 +25,7 @@ const mockFilteredSiteTrialPatient = (
 });
 
 const mockFilteredSiteTrialPatients = (
-  overrides?: RecursivePartial<filteredSiteTrialPatient[]>
+  overrides?: RecursivePartial<FilteredSiteTrialPatient[]>
 ) => {
   if (overrides) {
     return overrides.map((override) => mockFilteredSiteTrialPatient(override));

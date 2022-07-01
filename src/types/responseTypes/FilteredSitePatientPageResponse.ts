@@ -7,13 +7,13 @@ export type FilteredSitePatientPageResponse = {
   sitePatients: Array<FilteredSitePatient>;
 };
 
-export type filteredSiteTrialPatientLabel = {
+export type FilteredSiteTrialPatientLabel = {
   id?: string;
   title?: string;
   color?: string;
 };
 
-export type filteredSiteTrialPatient = {
+export type FilteredSiteTrialPatient = {
   id: string;
   stage: SiteTrialPatientStageType;
   starred?: boolean | null;
@@ -23,7 +23,7 @@ export type filteredSiteTrialPatient = {
     id: string;
     name: string;
   };
-  labels: Array<filteredSiteTrialPatientLabel>;
+  labels: Array<FilteredSiteTrialPatientLabel>;
 };
 
 export type FilteredSitePatient = {
@@ -40,5 +40,5 @@ export type FilteredSitePatient = {
       type?: string | null;
     };
   };
-  siteTrialPatients: Array<filteredSiteTrialPatient>;
+  siteTrialPatients: Array<FilteredSiteTrialPatient>;
 };
