@@ -32,6 +32,23 @@ const filteredSitePatientTransit = (
       transit.uuid(filteredSitePatient.patient.id),
       transit.keyword("name"),
       filteredSitePatient.patient.name,
+      transit.keyword("dob"),
+      filteredSitePatient.patient.dob,
+      transit.keyword("email"),
+      filteredSitePatient.patient.email,
+      transit.keyword("gender"),
+      filteredSitePatient.patient.gender,
+      ...(filteredSitePatient.patient.phoneNumber
+        ? [
+            transit.keyword("phoneNumber"),
+            transit.map([
+              transit.keyword("number"),
+              filteredSitePatient.patient.phoneNumber.number,
+              transit.keyword("type"),
+              filteredSitePatient.patient.phoneNumber.type,
+            ]),
+          ]
+        : []),
     ]),
     transit.keyword("siteTrialPatients"),
     filteredSitePatient.siteTrialPatients.map((siteTrialPatient) =>

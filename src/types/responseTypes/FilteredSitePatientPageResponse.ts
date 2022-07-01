@@ -1,5 +1,11 @@
 import { SiteTrialPatientStageType } from "types/PatientAggregate";
 
+export enum Gender {
+  MALE = "Male",
+  FEMALE = "Female",
+  INTERSEX = "Intersex",
+}
+
 export type FilteredSitePatientPageResponse = {
   limit: number;
   offset: number;
@@ -34,7 +40,7 @@ export type FilteredSitePatient = {
     name: string;
     dob?: Date | null;
     email?: string | null;
-    gender?: string | null;
+    gender?: `${Gender}` | null;
     phoneNumber?: {
       number?: string | null;
       type?: string | null;
