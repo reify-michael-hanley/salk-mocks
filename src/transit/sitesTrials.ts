@@ -2,7 +2,7 @@ import * as transit from "transit-js";
 import { SiteTrial } from "types/SiteTrial";
 import { transitWriter } from "utils/transitUtils";
 
-const siteTrialTransitMap = (siteTrialData: SiteTrial) => {
+export const siteTrialTransitMap = (siteTrialData: SiteTrial) => {
   const siteTrialTransit = transit.map([
     transit.keyword("archived"),
     siteTrialData.archived,
@@ -102,6 +102,13 @@ const siteTrialTransitMap = (siteTrialData: SiteTrial) => {
   ]);
 
   return siteTrialTransit;
+};
+
+export const generateSitetrialTransit = (siteTrial: SiteTrial) => {
+  const transitSiteTrial = siteTrialTransitMap(siteTrial);
+  const transitJson = transitWriter.write(transitSiteTrial);
+
+  return transitJson;
 };
 
 export const generateSiteTrialsTransit = (siteTrials: SiteTrial[]): string => {

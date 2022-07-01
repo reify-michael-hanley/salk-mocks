@@ -1,4 +1,6 @@
-enum SiteTrialPatientStage {
+import { SiteTrialPatient } from "./SiteTrialPatient";
+
+export enum SiteTrialPatientStage {
   SCREEN_FAILURE = "screen-failure",
   COMPLETED = "completed",
   DISCONTINUED = "discontinued",
@@ -10,32 +12,7 @@ enum SiteTrialPatientStage {
   ARCHIVE = "archive",
 }
 
-export type SiteTrialPatient = {
-  "stage-last-updated": Date | null;
-  "updated-at": Date;
-  "acknowledged-at": Date;
-  "subject-id": string;
-  stage: SiteTrialPatientStage;
-  starred: boolean;
-  "last-contact-attempt-date": Date;
-  "planned-screening-date": Date;
-  "site-patient-id": string;
-  "date-consent-signed": Date;
-  "patient-source-id": null | string;
-  "screen-fail-reason": string;
-  acknowledged: boolean;
-  id: string;
-  "site-trial-id": string;
-  "patient-number": number;
-  "owner-id": string;
-  "contact-attempt-count": number;
-  "date-enrolled": null | Date;
-  "patient-log-comments": string;
-  "pre-screen-fail-reason": string;
-  "referral-patient-id": null | string;
-  "consent-form-version": string;
-  "created-at": Date;
-};
+export type SiteTrialPatientStageType = `${SiteTrialPatientStage}`;
 
 export type SitePatient = {
   "bulk-import-payload-id": string;

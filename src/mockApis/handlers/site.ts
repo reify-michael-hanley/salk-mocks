@@ -1,13 +1,16 @@
+import { mockFilteredSitePatientsResponse } from "mockData/filteredSitePatientsResponse";
 import { mockFusebox } from "mockData/fusbox";
 import { mockPotentialTrials } from "mockData/potentialTrial";
 import { mockSites } from "mockData/site";
 import { rest } from "msw";
+import { generateFilteredSitePatientPageTransit } from "transit/filteredSitePatientPage";
 import { generateFuseboxTransit } from "transit/fusebox";
 import { generatePotentialTrialsTransit } from "transit/potentialTrials";
 import { generateSitesTransit } from "transit/sites";
 import { Fusebox } from "types/Fusebox";
-import { ApiMockOverrideType } from "types/MockApiTypes";
+import { ApiMockOverrideCallback } from "types/MockApiTypes";
 import { PotentialTrial } from "types/PotentialTrial";
+import { FilteredSitePatientPageResponse } from "types/responseTypes/FilteredSitePatientPageResponse";
 import { Site } from "types/Site";
 
 const siteHandlers = {
@@ -19,51 +22,69 @@ const siteHandlers = {
     rest.get(`/api/salk/site/:siteId/user`, (_req, res, ctx) => {
       return res(ctx.json([]));
     }),
-  getPotentialTrials: (overrides?: ApiMockOverrideType<PotentialTrial[]>) => {
-    const status = overrides?.status ?? 200;
-
-    const potentialTrials = overrides?.response ?? mockPotentialTrials(1);
-    const transitPotentialTrials =
-      generatePotentialTrialsTransit(potentialTrials);
-
+  getPotentialTrials: (
+    overrides?: ApiMockOverrideCallback<PotentialTrial[]>
+  ) => {
     return rest.get(
       `/api/salk/site/:siteId/potential-trials`,
-      (_req, res, ctx) => {
+      (req, res, ctx) => {
+        const { body = mockPotentialTrials(1), status = 200 } =
+          overrides?.(req) || {};
+
+        const transitResponse = generatePotentialTrialsTransit(body);
+
         return res(
           ctx.status(status),
           ctx.set("Content-Type", "application/transit+json;charset=UTF-8"),
-          ctx.body(transitPotentialTrials)
+          ctx.body(transitResponse)
         );
       }
     );
   },
-  getFuseBox: (overrides?: ApiMockOverrideType<Fusebox>) => {
-    const status = overrides?.status ?? 200;
+  getFuseBox: (overrides?: ApiMockOverrideCallback<Fusebox>) => {
+    return rest.get(`/api/salk/site/:siteId/fusebox`, (req, res, ctx) => {
+      const { body = mockFusebox, status = 200 } = overrides?.(req) || {};
 
-    const fuseboxResponse = overrides?.response ?? mockFusebox;
-    const transitSites = generateFuseboxTransit(fuseboxResponse);
+      const transitResponse = generateFuseboxTransit(body);
 
-    return rest.get(`/api/salk/site/:siteId/fusebox`, (_req, res, ctx) => {
       return res(
         ctx.status(status),
         ctx.set("Content-Type", "application/transit+json;charset=UTF-8"),
-        ctx.body(transitSites)
+        ctx.body(transitResponse)
       );
     });
   },
-  getSite: (overrides?: ApiMockOverrideType<Site[]>) => {
-    const status = overrides?.status ?? 200;
+  getSites: (overrides?: ApiMockOverrideCallback<Site[]>) => {
+    return rest.get(`/api/salk/sites`, (req, res, ctx) => {
+      const { body = mockSites(1), status = 200 } = overrides?.(req) || {};
 
-    const sites = overrides?.response ?? mockSites(1);
-    const transitSites = generateSitesTransit(sites);
+      const transitResponse = generateSitesTransit(body);
 
-    return rest.get(`/api/salk/sites`, (_req, res, ctx) => {
       return res(
         ctx.status(status),
         ctx.set("Content-Type", "application/transit+json;charset=UTF-8"),
-        ctx.body(transitSites)
+        ctx.body(transitResponse)
       );
     });
+  },
+  getFilteredSitePatientPage: (
+    overrides?: ApiMockOverrideCallback<FilteredSitePatientPageResponse>
+  ) => {
+    return rest.post(
+      `/api/salk/site/:siteId/patient-index`,
+      (req, res, ctx) => {
+        const { body = mockFilteredSitePatientsResponse(), status = 200 } =
+          overrides?.(req) || {};
+
+        const transitResponse = generateFilteredSitePatientPageTransit(body);
+
+        return res(
+          ctx.status(status),
+          ctx.set("Content-Type", "application/transit+json;charset=UTF-8"),
+          ctx.body(transitResponse)
+        );
+      }
+    );
   },
 };
 

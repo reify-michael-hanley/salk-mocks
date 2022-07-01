@@ -4,53 +4,55 @@ import { rest } from "msw";
 import { generateConceptResearchIndicationTransit } from "transit/conceptResearchIndications";
 import { generateTherapeuticAreaTransit } from "transit/therapeuticAreas";
 import { ConceptResearchIndication } from "types/ConceptResearchIndication";
-import { ApiMockOverrideType } from "types/MockApiTypes";
+import { ApiMockOverrideCallback } from "types/MockApiTypes";
 import { TherapeuticArea } from "types/TherapeuticAreas";
 
 const salkHandlers = {
-  getTherapeuticAreas: (overrides?: ApiMockOverrideType<TherapeuticArea[]>) => {
-    const status = overrides?.status ?? 200;
+  /** `/api/salk/therapeutic-areas` */
+  getTherapeuticAreas: (
+    overrides?: ApiMockOverrideCallback<TherapeuticArea[]>
+  ) => {
+    return rest.get(`/api/salk/therapeutic-areas`, (req, res, ctx) => {
+      const { body = mockTherapeuticAreas, status = 200 } =
+        overrides?.(req) || {};
 
-    const therapeuticAreasResponse =
-      overrides?.response ?? mockTherapeuticAreas;
-    const transitTherapeuticAreas = generateTherapeuticAreaTransit(
-      therapeuticAreasResponse
-    );
+      const transitResponse = generateTherapeuticAreaTransit(body);
 
-    return rest.get(`/api/salk/therapeutic-areas`, (_req, res, ctx) => {
       return res(
         ctx.status(status),
         ctx.set("Content-Type", "application/transit+json;charset=UTF-8"),
-        ctx.body(transitTherapeuticAreas)
+        ctx.body(transitResponse)
       );
     });
   },
+  /** `/api/salk/research-indications` */
   getConceptResearchIndications: (
-    overrides?: ApiMockOverrideType<ConceptResearchIndication[]>
+    overrides?: ApiMockOverrideCallback<ConceptResearchIndication[]>
   ) => {
-    const status = overrides?.status ?? 200;
-    const response = overrides?.response ?? mockConceptResearchIndication;
+    return rest.get(`/api/salk/research-indications`, (req, res, ctx) => {
+      const { body = mockConceptResearchIndication, status = 200 } =
+        overrides?.(req) || {};
 
-    const transitConceptResearchIndications =
-      generateConceptResearchIndicationTransit(response);
+      const responseTransit = generateConceptResearchIndicationTransit(body);
 
-    return rest.get(`/api/salk/research-indications`, (_req, res, ctx) => {
       return res(
         ctx.status(status),
         ctx.set("Content-Type", "application/transit+json"),
-        ctx.body(transitConceptResearchIndications)
+        ctx.body(responseTransit)
       );
     });
   },
-  getSiteNetworks: (overrides?: ApiMockOverrideType<[]>) => {
-    const status = overrides?.status ?? 200;
-    const response = JSON.stringify([]);
+  /** `/api/salk/site-networks` */
+  getSiteNetworks: (overrides?: ApiMockOverrideCallback<[]>) => {
+    return rest.get(`/api/salk/site-networks`, (req, res, ctx) => {
+      const { body = [], status = 200 } = overrides?.(req) || {};
 
-    return rest.get(`/api/salk/site-networks`, (_req, res, ctx) => {
+      const transitBody = JSON.stringify(body);
+
       return res(
         ctx.status(status),
         ctx.set("Content-Type", "application/transit+json"),
-        ctx.body(response)
+        ctx.body(transitBody)
       );
     });
   },

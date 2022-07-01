@@ -3,11 +3,11 @@ export type Site = {
   "state-province": string;
   name: string;
   "trial-creation-disabled": boolean;
-  "site-trials": Array<{
+  "site-trials": {
     name: string;
     "site-number": number | null;
     investigator: null | { name: string };
-  }>;
+  }[];
   "postal-code": null | string;
   "reify-managed": boolean;
   "row-id": number;

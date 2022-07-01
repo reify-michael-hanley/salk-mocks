@@ -1,3 +1,3 @@
-import { mockWorker } from "./mockApis";
+import { mockWorker } from "./SalkServer";
 
 export { mockWorker };

@@ -1,16 +1,12 @@
-import {
-  Patient,
-  PatientAggregate,
-  SitePatient,
-  SiteTrialPatient,
-} from "types/PatientAggregate";
+import { Patient, PatientAggregate, SitePatient } from "types/PatientAggregate";
 import * as transit from "transit-js";
 import { transitWriter } from "utils/transitUtils";
+import { SiteTrialPatient } from "types/SiteTrialPatient";
 
-const siteTrialPatientTransitMap = (siteTrialPatient: SiteTrialPatient) => {
+export const siteTrialPatientTransitMap = (
+  siteTrialPatient: SiteTrialPatient
+) => {
   const siteTrialPatientTransit = transit.map([
-    transit.keyword("stage-last-updated"),
-    siteTrialPatient["stage-last-updated"],
     transit.keyword("updated-at"),
     siteTrialPatient["updated-at"],
     transit.keyword("acknowledged-at"),
@@ -21,8 +17,6 @@ const siteTrialPatientTransitMap = (siteTrialPatient: SiteTrialPatient) => {
     transit.keyword(siteTrialPatient.stage),
     transit.keyword("starred"),
     siteTrialPatient.starred,
-    transit.keyword("last-contact-attempt-date"),
-    siteTrialPatient["last-contact-attempt-date"],
     transit.keyword("planned-screening-date"),
     siteTrialPatient["planned-screening-date"],
     transit.keyword("site-patient-id"),
@@ -43,8 +37,6 @@ const siteTrialPatientTransitMap = (siteTrialPatient: SiteTrialPatient) => {
     siteTrialPatient["patient-number"],
     transit.keyword("owner-id"),
     siteTrialPatient["owner-id"],
-    transit.keyword("contact-attempt-count"),
-    siteTrialPatient["contact-attempt-count"],
     transit.keyword("date-enrolled"),
     siteTrialPatient["date-enrolled"],
     transit.keyword("patient-log-comments"),
@@ -128,8 +120,11 @@ export const patientAggregateTransitMap = (
   const patientAggregateTransit = transit.map([
     transit.keyword("id"),
     transit.uuid(patientAggregate.id),
+    transit.keyword("site-trial-patient"),
     siteTrialPatientTransitMap(patientAggregate["site-trial-patient"]),
+    transit.keyword("site-patient"),
     sitePatientTransitMap(patientAggregate["site-patient"]),
+    transit.keyword("patient"),
     patientTransitMap(patientAggregate.patient),
   ]);
 

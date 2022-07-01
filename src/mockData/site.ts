@@ -22,7 +22,6 @@ export const mockSite = (): Site => ({
   "state-province": `US-${faker.address.stateAbbr()}`,
   name: faker.company.companyName(),
   "trial-creation-disabled": false,
-  "site-trials": generateSiteTrials(),
   "postal-code": faker.address.zipCodeByState("??"),
   "reify-managed": true,
   "row-id": faker.datatype.number(100),
@@ -32,6 +31,7 @@ export const mockSite = (): Site => ({
   "principal-id": principleId,
   country: "US",
   id: faker.datatype.uuid(),
+  "site-trials": generateSiteTrials(),
 });
 
 export const mockSites = (numberOfSites = 10) => {

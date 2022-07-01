@@ -2,46 +2,49 @@ import { mockPatientAggregates } from "mockData/patientAggregate";
 import { mockSiteTrial, mockSiteTrials } from "mockData/siteTrial";
 import { rest } from "msw";
 import { generatePatientAggregateTransit } from "transit/patientAggregates";
-import { generateSiteTrialsTransit } from "transit/sitesTrials";
-import { ApiMockOverrideType } from "types/MockApiTypes";
+import {
+  generateSiteTrialsTransit,
+  generateSitetrialTransit,
+} from "transit/sitesTrials";
+import { ApiMockOverrideCallback } from "types/MockApiTypes";
 import { PatientAggregate } from "types/PatientAggregate";
 import { SiteTrial } from "types/SiteTrial";
 
 const siteTrialHandlers = {
   /** GET `api/salk/site-trial/:siteTrialId` */
-  getSiteTrial: (overrides?: ApiMockOverrideType<SiteTrial>) => {
-    const status = overrides?.status ?? 200;
-
-    const siteTrial = overrides?.response ?? mockSiteTrial();
-
+  getSiteTrial: (overrides?: ApiMockOverrideCallback<SiteTrial>) => {
     return rest.get(`api/salk/site-trial/:siteTrialId`, (req, res, ctx) => {
-      siteTrial.id = req.params.siteTrialId as string;
+      const { body = mockSiteTrial(), status = 200 } = overrides?.(req) || {};
+      body.id = req.params.siteTrialId as string;
 
-      const transitSiteTrials = generateSiteTrialsTransit([siteTrial]);
+      const transitResponse = generateSitetrialTransit(body);
+
       return res(
         ctx.status(status),
         ctx.set("Content-Type", "application/transit+json"),
-        ctx.body(transitSiteTrials)
+        ctx.body(transitResponse)
       );
     });
   },
   /** GET `/api/salk/site/:siteId/site-trials/with-matches` */
-  getSiteTrialsWithMatches: (overrides?: ApiMockOverrideType<SiteTrial[]>) => {
-    const status = overrides?.status ?? 200;
-
-    const siteTrials = overrides?.response ?? mockSiteTrials(10);
-    const transitSiteTrials = generateSiteTrialsTransit(siteTrials);
-
+  getSiteTrialsWithMatches: (
+    overrides?: ApiMockOverrideCallback<SiteTrial[]>
+  ) => {
     return rest.get(
       `/api/salk/site/:siteId/site-trials/with-matches`,
       (req, res, ctx) => {
+        const { body = mockSiteTrials(10), status = 200 } =
+          overrides?.(req) || {};
+
         if (req.headers.get("accept") === "application/json") {
-          return res(ctx.json(siteTrials));
+          return res(ctx.status(status), ctx.json(body));
         } else {
+          const transitResponse = generateSiteTrialsTransit(body);
+
           return res(
             ctx.status(status),
             ctx.set("Content-Type", "application/transit+json;charset=UTF-8"),
-            ctx.body(transitSiteTrials)
+            ctx.body(transitResponse)
           );
         }
       }
@@ -58,21 +61,20 @@ const siteTrialHandlers = {
   },
   /** GET `/api/salk/site-trial/:siteTrialId/patient-aggregates` */
   getPatientAggregates: (
-    overrides?: ApiMockOverrideType<PatientAggregate[]>
+    overrides?: ApiMockOverrideCallback<PatientAggregate[]>
   ) => {
-    const status = overrides?.status ?? 200;
-
-    const patientAggregates = overrides?.response ?? mockPatientAggregates();
-    const transitPatientAggregates =
-      generatePatientAggregateTransit(patientAggregates);
-
     return rest.get(
       `/api/salk/site-trial/:siteTrialId/patient-aggregates`,
-      (_req, res, ctx) => {
+      (req, res, ctx) => {
+        const { body = mockPatientAggregates(), status = 200 } =
+          overrides?.(req) || {};
+
+        const transitResponse = generatePatientAggregateTransit(body);
+
         return res(
           ctx.status(status),
           ctx.set("Content-Type", "application/transit+json"),
-          ctx.body(transitPatientAggregates)
+          ctx.body(transitResponse)
         );
       }
     );
