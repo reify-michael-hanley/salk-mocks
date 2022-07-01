@@ -49,7 +49,7 @@ const mockFilteredSitePatient = (
       name: faker.name.findName(),
       email: faker.internet.email(),
       gender: faker.helpers.objectValue(Gender),
-      dob: faker.date.past(),
+      dob: faker.date.birthdate(),
       ...overrides?.patient,
     },
     siteTrialPatients: mockFilteredSiteTrialPatients(
