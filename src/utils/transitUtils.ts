@@ -2,7 +2,7 @@ import * as transit from "transit-js";
 
 const transitDateHandler = transit.makeWriteHandler({
   tag: () => "java.time.Instant",
-  rep: (date: Date) => date.getTime(),
+  rep: (date: Date) => Math.floor(date.getTime() / 1000),
   stringRep: () => null,
 });
 

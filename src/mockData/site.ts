@@ -26,7 +26,7 @@ export const mockSite = (): Site => ({
   "reify-managed": true,
   "row-id": faker.datatype.number(100),
   "is-pseudo": false,
-  "created-at": faker.date.past().toDateString(),
+  "created-at": faker.date.recent().toDateString(),
   "time-zone": faker.address.timeZone(),
   "principal-id": principleId,
   country: "US",

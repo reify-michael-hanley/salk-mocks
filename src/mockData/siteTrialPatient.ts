@@ -6,14 +6,14 @@ import { RecursivePartial } from "utils/typeUtils";
 export const mockSiteTrialPatient = (
   overrides?: RecursivePartial<SiteTrialPatient>
 ): SiteTrialPatient => ({
-  "updated-at": faker.date.past(),
-  "acknowledged-at": faker.date.past(),
+  "updated-at": faker.date.recent(),
+  "acknowledged-at": faker.date.recent(),
   "subject-id": faker.lorem.word(),
   stage: faker.helpers.objectValue(SiteTrialPatientStage),
   starred: faker.datatype.boolean(),
-  "planned-screening-date": faker.date.past(),
+  "planned-screening-date": faker.date.recent(),
   "site-patient-id": faker.datatype.uuid(),
-  "date-consent-signed": faker.date.past(),
+  "date-consent-signed": faker.date.recent(),
   "patient-source-id": null,
   "screen-fail-reason": null,
   acknowledged: faker.datatype.boolean(),
@@ -21,11 +21,11 @@ export const mockSiteTrialPatient = (
   "site-trial-id": faker.datatype.uuid(),
   "patient-number": faker.phone.number(),
   "owner-id": faker.datatype.uuid(),
-  "date-enrolled": faker.date.past(),
+  "date-enrolled": faker.date.recent(),
   "patient-log-comments": faker.lorem.sentence(),
   "pre-screen-fail-reason": faker.lorem.sentence(),
   "referral-patient-id": null,
   "consent-form-version": null,
-  "created-at": faker.date.past(),
+  "created-at": faker.date.recent(),
   ...overrides,
 });

@@ -4,6 +4,7 @@ import {
   FilteredSitePatient,
   FilteredSitePatientPageResponse,
   FilteredSiteTrialPatient,
+  Gender,
 } from "types/responseTypes/FilteredSitePatientPageResponse";
 import { RecursivePartial } from "utils/typeUtils";
 
@@ -41,13 +42,13 @@ const mockFilteredSitePatient = (
 ): FilteredSitePatient => {
   return {
     id: faker.datatype.uuid(),
-    createdAt: faker.date.past(),
+    createdAt: faker.date.recent(),
     ...overrides,
     patient: {
       id: faker.datatype.uuid(),
       name: faker.name.findName(),
       email: faker.internet.email(),
-      gender: faker.lorem.word(),
+      gender: faker.helpers.objectValue(Gender),
       dob: faker.date.past(),
       ...overrides?.patient,
     },

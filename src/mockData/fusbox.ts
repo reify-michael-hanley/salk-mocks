@@ -7,7 +7,7 @@ export const mockFusebox: Fusebox = {
     namespace: "salk",
     name: "race-and-ethnicity",
     description: "Demo-mode feature flag",
-    "created-at": faker.date.past(),
+    "created-at": faker.date.recent(),
     "enabled?": null,
   },
   "study-team/enable-pii-fields": {
@@ -15,7 +15,7 @@ export const mockFusebox: Fusebox = {
     namespace: "study-team",
     name: "enable-pii-fields",
     description: "Demo-mode feature flag",
-    "created-at": faker.date.past(),
+    "created-at": faker.date.recent(),
     "enabled?": true,
   },
 };
