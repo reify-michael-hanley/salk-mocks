@@ -4,14 +4,10 @@ import SiteTrialPatientHandlers from "./siteTrialPatient";
 import TaskHandlers from "./task";
 import SalkHandlers from "./salk";
 import UserHandlers from "./user";
-import bulkActionHandlers from "mockApis/handlers/bulkAction";
-import siteHandlers from "mockApis/handlers/site";
-import siteTrialHandlers from "mockApis/handlers/siteTrial";
+import bulkActionHandlers from "./bulkAction";
 
 export {
   bulkActionHandlers,
-  siteHandlers,
-  siteTrialHandlers,
   SiteHandlers,
   SiteTrialHandlers,
   SiteTrialPatientHandlers,

@@ -1,13 +1,13 @@
+import { SiteTrial } from "./SiteTrial";
+
+type SiteTrials = Pick<SiteTrial, "name" | "site-number">[];
+
 export type Site = {
   "enable-patient-matching": boolean;
   "state-province": string;
   name: string;
   "trial-creation-disabled": boolean;
-  "site-trials": {
-    name: string;
-    "site-number": number | null;
-    investigator: null | { name: string };
-  }[];
+  "site-trials": SiteTrials;
   "postal-code": null | string;
   "reify-managed": boolean;
   "row-id": number;

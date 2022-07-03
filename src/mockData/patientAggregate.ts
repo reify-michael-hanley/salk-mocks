@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { PatientAggregate } from "types/PatientAggregate";
 import { RecursivePartial } from "utils/typeUtils";
+import { mockPatient } from "./patient";
 import { mockSiteTrialPatient } from "./siteTrialPatient";
 
 export const mockPatientAggregate = (
@@ -28,24 +29,7 @@ export const mockPatientAggregate = (
       "owner-id": faker.datatype.uuid(),
       ...overrides?.["site-patient"],
     },
-    patient: {
-      "updated-at": faker.date.recent(),
-      address: faker.address.streetAddress(true),
-      email: faker.internet.email(),
-      "preferred-pronouns-notes": faker.lorem.sentence(),
-      "preferred-pronouns": faker.lorem.word(),
-      name: faker.name.findName(),
-      "accessibility-reqs-notes": faker.lorem.sentence(),
-      nickname: faker.name.firstName(),
-      "employment-status": faker.lorem.word(),
-      id: patientId,
-      "owner-id": faker.datatype.uuid(),
-      gender: faker.lorem.word(),
-      hobbies: faker.lorem.word(),
-      "created-at": faker.date.recent(),
-      "restrict-processing": false,
-      ...overrides?.patient,
-    },
+    patient: mockPatient(overrides?.patient),
   };
 
   return patientAggregate;

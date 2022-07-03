@@ -1,9 +1,18 @@
 import { faker } from "@faker-js/faker";
-import { characters, planets } from "legacyDemoData/starwars";
+import { characters } from "legacyDemoData/starwars";
+import {
+  bulkActionHandlers,
+  SalkHandlers,
+  SiteHandlers,
+  SiteTrialHandlers,
+  SiteTrialPatientHandlers,
+  TaskHandlers,
+  UserHandlers,
+} from "mockApis/handlers";
 import { mockPatientAggregate } from "mockData/patientAggregate";
-import { mockSite } from "mockData/site";
 import { mockSiteTrial } from "mockData/siteTrial";
 import { DefaultBodyType, PathParams, RestRequest, setupWorker } from "msw";
+import { ApiOverrideResponse } from "types/MockApiTypes";
 import {
   PatientAggregate,
   SiteTrialPatientStageType,
@@ -16,25 +25,14 @@ import {
 } from "types/responseTypes/FilteredSitePatientPageResponse";
 import { SiteTrial } from "types/SiteTrial";
 import { transitRead } from "utils/transitUtils";
-import {
-  SalkHandlers,
-  SiteHandlers,
-  SiteTrialHandlers,
-  SiteTrialPatientHandlers,
-  TaskHandlers,
-  UserHandlers,
-  bulkActionHandlers,
-  siteHandlers,
-  siteTrialHandlers,
-} from "mockApis/handlers";
-import { ApiOverrideResponse } from "types/MockApiTypes";
+import { SiteOrchestrator } from "./SiteOrchestrator";
 // import fallbackHandlers from "./handlers/fallback";
 
-const site = mockSite();
-const siteTrials = planets.map((planet) =>
-  mockSiteTrial({ name: planet, "site-id": site.id })
-);
-const siteTrialIds = siteTrials.map((trial) => trial.id);
+const siteOrchestrator = SiteOrchestrator();
+const site = siteOrchestrator.getSite();
+const siteTrials = siteOrchestrator.trials.get();
+const siteTrialIds = siteOrchestrator.trials.ids();
+
 const patients = (() => {
   return Array.from(characters, (character) => {
     return mockPatientAggregate({
@@ -87,10 +85,9 @@ const onGetPatientAggregates = (
 const onSiteTrialGet = (
   req: RestRequest<DefaultBodyType, PathParams<string>>
 ): ApiOverrideResponse<SiteTrial> => {
-  const siteTrial = siteTrials.find(
-    (siteTrial) => siteTrial.id === req.params.siteTrialId
+  const siteTrial = siteOrchestrator.trials.get(
+    req.params.siteTrialId as string
   );
-
   return { body: siteTrial ?? mockSiteTrial() };
 };
 
@@ -168,11 +165,11 @@ const onGetFilteredSitePatientPage =
 
 const handlers = [
   SiteTrialHandlers.getSiteTrialsWithMatches(() => ({ body: siteTrials })),
-  siteTrialHandlers.getPatientAggregates(onGetPatientAggregates),
+  SiteTrialHandlers.getPatientAggregates(onGetPatientAggregates),
   SiteTrialHandlers.getSiteTrial(onSiteTrialGet),
   bulkActionHandlers.postAddPatientToTrials(onAddPatientToTrial),
-  siteHandlers.getSites(() => ({ body: [site] })),
-  siteHandlers.getFilteredSitePatientPage(onGetFilteredSitePatientPage),
+  SiteHandlers.getSites(() => ({ body: [site] })),
+  SiteHandlers.getFilteredSitePatientPage(onGetFilteredSitePatientPage),
 
   // ...Object.values(bulkActionHandlers).map((handler) => handler()),
   ...Object.values(SiteHandlers).map((handler) => handler()),

@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { Site } from "types/Site";
 import { principleId } from "utils/matchingDataUtils";
 
-const generateSiteTrials = () => {
+const generateSiteTrials = (): Site["site-trials"] => {
   const siteTrials = Array.from(
     {
       length: faker.datatype.number({ min: 1, max: 15 }),
@@ -10,7 +10,6 @@ const generateSiteTrials = () => {
     () => ({
       name: faker.lorem.slug(),
       "site-number": faker.datatype.number({ min: 100, max: 200 }),
-      investigator: { name: faker.name.findName() },
     })
   );
 

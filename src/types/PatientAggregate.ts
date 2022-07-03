@@ -1,3 +1,5 @@
+import { Patient } from "./Patient";
+import { SitePatient } from "./SitePatient";
 import { SiteTrialPatient } from "./SiteTrialPatient";
 
 export enum SiteTrialPatientStage {
@@ -13,35 +15,6 @@ export enum SiteTrialPatientStage {
 }
 
 export type SiteTrialPatientStageType = `${SiteTrialPatientStage}`;
-
-export type SitePatient = {
-  "bulk-import-payload-id": string;
-  "batch-id": string;
-  mrn: string;
-  id: string;
-  "site-id": string;
-  "patient-id": string;
-  "created-at": Date;
-  "owner-id": string;
-};
-
-export type Patient = {
-  "updated-at": Date;
-  address: string;
-  email: string;
-  "preferred-pronouns-notes": string;
-  "preferred-pronouns": string;
-  name: string;
-  "accessibility-reqs-notes": string;
-  nickname: null | string;
-  "employment-status": string;
-  id: string;
-  "owner-id": string;
-  gender: string;
-  hobbies: string;
-  "created-at": Date;
-  "restrict-processing": boolean;
-};
 
 export type PatientAggregate = {
   id: string;
