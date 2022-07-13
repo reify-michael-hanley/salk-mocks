@@ -40,7 +40,7 @@ export type FilteredSitePatient = {
     name: string;
     dob?: Date | null;
     email?: string | null;
-    gender?: `${Gender}` | null;
+    gender?: string | null;
     phoneNumber?: {
       number?: string | null;
       type?: string | null;

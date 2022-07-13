@@ -13,13 +13,9 @@ import { SiteTrial } from "types/SiteTrial";
 const siteTrialHandlers = {
   /** GET `api/salk/site-trial/:siteTrialId` */
   getSiteTrial: (overrides?: ApiMockOverrideCallback<SiteTrial>) => {
-    console.log("SITETRIAL WORKING 0");
     return rest.get(`api/salk/site-trial/:siteTrialId`, (req, res, ctx) => {
-      console.log("SITETRIAL WORKING 1");
       const { body = mockSiteTrial(), status = 200 } = overrides?.(req) || {};
-      console.log("SITETRIAL WORKING 2");
       body.id = req.params.siteTrialId as string;
-      console.log("SITETRIAL WORKING 3");
 
       const transitResponse = generateSitetrialTransit(body);
 
